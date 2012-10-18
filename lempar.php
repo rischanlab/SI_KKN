@@ -2,11 +2,11 @@
 session_start();
 session_cache_expire(1);
 //$cek_status= $_SESSION['data']['status'];
-if ($_SESSION['data']['status']=='1'){
-	echo("<script language=javascript>window.location='http://localhost/LPM/form';</script>");
+if ($_SESSION['data']['status']=='1'){ //jika status =1 maka dilempar ke form/mahasiswa
+	echo("<script language=javascript>window.location='http://localhost/SI_KKN/form';</script>");
 	} 
-if($_SESSION['data']['status']=='2'){
-	echo("<script language=javascript>window.location='http://localhost/LPM/dosen';</script>");
+if($_SESSION['data']['status']=='2'){ //jika status =2 maka dilempar ke dosen
+	echo("<script language=javascript>window.location='http://localhost/SI_KKN/dosen';</script>");
 	}
 	else{
 ?>

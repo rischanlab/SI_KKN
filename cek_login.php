@@ -32,7 +32,7 @@ $_SESSION['data']['sks_mk']=$sks_mk; // sks matakuliah
 $_SESSION['data']['status']=$status; // status login, 1= mahasiswa , 2 dosen
 
 	
-echo("<script language=javascript>window.location='http://localhost/LPM/lempar.php';</script>");
+echo("<script language=javascript>window.location='http://localhost/SI_KKN/lempar.php';</script>");
 	
 }else{
 ?>
