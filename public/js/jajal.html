@@ -1,0 +1,38 @@
+<html>
+<title>
+
+</title>
+
+<head>
+
+
+	<script type="text/javascript" src="jq-182.js"></script>
+
+	<script type="text/javascript">
+		
+		$(document).ready(
+    function (){
+        $('input:file').change(
+            function(){
+                if ($(foto).val() && $(sk).val()) {
+                    $('input:submit').attr('disabled',false); 
+                } 
+            }
+            );
+    });
+		</script>
+</head>
+<body>
+
+<form action="#" method="post">
+    <input type="file" name="foto" id="foto" />
+	  <input type="file" name="sk" id="sk" />
+
+  
+    <input type="submit" value="submit" disabled />
+</form>
+<div id="result"></div>
+
+</body>
+
+</html>
