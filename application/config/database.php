@@ -45,9 +45,9 @@
 | the active record class
 */
 
-$active_group = 'saintek';
+$active_group = 'default';
 $active_record = TRUE;
-/**
+
 $db['default']['hostname'] = "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=127.0.0.1)(PORT=1521))(CONNECT_DATA=(SID=XE)))";
 $db['default']['username'] = "SIA";
 $db['default']['password'] = "sia";
@@ -63,7 +63,8 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
-**/
+
+/**
 
 $db['saintek']['hostname'] = "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=127.0.0.1)(PORT=1521))(CONNECT_DATA=(SID=XE)))";
 $db['saintek']['username'] = "SIA";
@@ -80,6 +81,6 @@ $db['saintek']['dbcollat'] = 'utf8_general_ci';
 $db['saintek']['swap_pre'] = '';
 $db['saintek']['autoinit'] = TRUE;
 $db['saintek']['stricton'] = FALSE;
-
+**/
 /* End of file database.php */
 /* Location: ./application/config/database.php */

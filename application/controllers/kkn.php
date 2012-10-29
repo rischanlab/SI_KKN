@@ -42,7 +42,7 @@ class Kkn extends CI_Controller {
 				echo "<meta http-equiv='refresh' content='0; url=".base_url()."'>";
 			}
 			else if($tanda=="Admin"){
-				echo "<meta http-equiv='refresh' content='0; url=".base_url()."admin'>";
+				echo "<meta http-equiv='refresh' content='0; url=".base_url()."manage/peserta_kkn_management_all'>";
 			}
 			else {
 				echo "<meta http-equiv='refresh' content='0; url=".base_url()."dosen'>";
@@ -110,19 +110,6 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."'>";
 		$this->load->view('Kkn/bg_footer');
 	}
 	
-	function passwordmhs()
-	{
-		$session=isset($_SESSION['username_belajar']) ? $_SESSION['username_belajar']:'';
-		if($session!=""){
-		$pecah=explode("|",$session);
-		$data["nim"]=$pecah[0];
-		$data["nama"]=$pecah[1];
-		$this->load->view('Kkn/ganti_password',$data);
-		}
-		else {
-			echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/'>";
-		}
-	}
 	function updatepassword()
 	{
 		$username=$this->input->post('username');

@@ -4,7 +4,6 @@ class Form_Model extends CI_Model
 	function __construct()
 	{
 		parent::__construct();
-		$this->db = $this->load->database('saintek',true);
 	}
 	function list_all(){
 		return $this->db->get($D_MAHASISWA);

@@ -29,11 +29,13 @@ Admin LPM
 4. Manage ANgkatan KKN
 5. Melihat List pendaftar KKN tapi tidak bisa menambah pendaftar
 6. Membuat Kelompok KKN (tempat, DPL) DPL akan terlihat Nama dan Alamatnya (diambil dari D_dosen)
+	Aturan pemberian nama kelompok AngkatanNamaKelompok contoh 77KOTA1
 7. Menambahkan mahasiswa kedalam kelompok yang telah dibuat (Mahasiswa akan terlihat NIM dan Fakulatasnya)
 8. Mahasiswa yang sudah di tambah ke kelompok akan bersetatus SUDAH =3 shingga tak akan tampil ketika akan menambahkan mahasiswa ke dalam kelompok baru.
 9. Preview siap di print dan export ke file csv
 10. Generate kartu KKN.. (bingung ttdne jek)
-11. Searching Member berdasarkan ... :-D
+11. Admin bisa mengexport seluruh data peserta KKN per TA/Periode/Angkatan
+12. Searching Member berdasarkan ... :-D
 
 
 Dosen/ DPL

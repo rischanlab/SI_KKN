@@ -9,8 +9,6 @@ class Dosen extends CI_Controller {
 		$this->load->library(array('form_validation','session','image_lib'));
 		$this->load->helper(array('form','url', 'text_helper','date'));
 		$this->load->database();
-		$this->db = $this->load->database('saintek',true);
-
 		session_start();
 	}
 

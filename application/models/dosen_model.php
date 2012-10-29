@@ -2,14 +2,11 @@
 class Dosen_model extends CI_Model
 {
 
-
 	function __construct()
 	{
 		parent::__construct();
 
 	}
-
-
 
 	public function get_dropdown($id_dosen) {
 		$table = 'KKN_KELOMPOK';

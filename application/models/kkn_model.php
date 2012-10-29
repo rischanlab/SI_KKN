@@ -9,12 +9,12 @@ class Kkn_model extends CI_Model
 		{
 			$user_bersih=$user;
 			$pass_bersih=$pass;
-			$query=$this->db->query("select * from tbllogin where username='$user_bersih' and psw='$pass_bersih'");
+			$query=$this->db->query("select * from KKN_ADMIN where username='$user_bersih' and psw='$pass_bersih'");
 			return $query;
 		}
 	function Update_Password($nim,$pwd)
 		{
-			$this->db->query("update tbllogin set psw='$pwd' where username='$nim'");
+			$this->db->query("update KKN_ADMIN set psw='$pwd' where username='$nim'");
 		}
 
 
