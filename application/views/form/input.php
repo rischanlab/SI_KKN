@@ -217,7 +217,7 @@ window.onload = loadImages;
 										</tr>
 										<tr>
 											<td valign="top" class="txt_login">Kecamatan</td>
-											<td class="txt_login"><input type="text" name="nm_kec"
+											<td class="txt_login"><input type="text" readonly="true" name="nm_kec"
 												class="inputx">
 											
 											</td>
@@ -260,7 +260,7 @@ window.onload = loadImages;
 											</td>
 										</tr>
 										<tr>
-											<td valign="top" class="txt_login">RT/RW*</td>
+											<td valign="top" class="txt_login">RT/RW</td>
 											<td class="txt_login"><input type="text" name="rt_jogja"
 												class="inputy"
 												value="<?php echo set_value('RT_JOGJA',$this->form_data->RT_JOGJA); ?>" />

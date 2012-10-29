@@ -451,21 +451,45 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."'>";
 				$nim =$_SESSION['data']['id_user'];
 				$nm_user2 =$_SESSION['data']['nm_user'];
 				$this->load->model('Mahasiswa_model','',TRUE);
+				$sudah=$this->Mahasiswa_model->get_sudah_kkn_mhs($nim);
+				foreach($sudah->result() as $hasil)
+				{ $status_sudah=$hasil->SUDAH;
+				if ($status_sudah=="3") {
+				
+				
+				
+						$this->load->model('Mahasiswa_model','',TRUE);
 
-				$data['mahasiswa'] = $this->Mahasiswa_model->get_buktidaftar($nim)->row();
-					$data['title'] = 'Mahasiswa Detail';
-					$data['link_back'] = anchor('mahasiswa/index/','Kembali Ke Beranda',array('class'=>'back'));
-					// load view
-					$datestring = "Login : %d-%m-%Y pukul %h:%i %a";
-					$time = time();
-					$var = array();
-					$var["nama"]=$nm_user2;
-					
-					$var["tanggal"] = mdate($datestring, $time);
+						$data['mahasiswa'] = $this->Mahasiswa_model->get_buktidaftar($nim)->row();
+							$data['title'] = 'Mahasiswa Detail';
+							$data['link_back'] = anchor('mahasiswa/index/','Kembali Ke Beranda',array('class'=>'back'));
+							// load view
+							$datestring = "Login : %d-%m-%Y pukul %h:%i %a";
+							$time = time();
+							$var = array();
+							$var["nama"]=$nm_user2;
+							
+							$var["tanggal"] = mdate($datestring, $time);
+						
+						
+						$this->load->view('mahasiswa/expbuktidaftar', $data);
+						}
 				
 				
-				$this->load->view('mahasiswa/expbuktidaftar', $data);
+				else {
+					?>
+					<script type="text/javascript">
+						alert('LPM Belum melakukan Pembagian Kelompok KKN secara keseluruhan, silahkan tunggu beberapa hari lagi');
+					</script>
+					<?php
+					echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/mahasiswa/'>";
+				
+				
 					}
+				
+				
+				}
+				}
 			else{
 				?>
 <script type="text/javascript" language="javascript">
