@@ -63,15 +63,7 @@ window.onload = loadImages;
 
 
 
-										<tr>
-											<td valign="top" class="txt_login">No Pendaftaran</td>
-											<td class="txt_login"><input type="text" readonly="true" style="cursor:not-allowed;" name="no"
-												class="inputx"
-												value="<?php echo set_value('NO',$this->form_data->NO); ?>"
-												/ width="500">
-											
-											</td>
-										</tr>
+										
 
 										<tr>
 											<td valign="top" class="txt_login">Nama</td>

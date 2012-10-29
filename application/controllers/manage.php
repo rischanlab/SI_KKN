@@ -97,6 +97,8 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 
 					$crud->unset_edit_fields('SUDAH');
 					$crud->unset_add();
+					$crud->unset_edit();
+					$crud->unset_delete();
 					$crud->unset_add_fields('NO','SUDAH');
 					$crud->set_subject('Peserta KKN');
 					$crud->required_fields('ALAMAT_JOGJA');
@@ -179,7 +181,8 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 					->display_as('PATH_SK_TIDAK_HAMIL','Upload SK Tidak Hamil');
 						
 
-
+					$crud->unset_edit();
+					$crud->unset_delete();
 					$crud->unset_edit_fields('SUDAH');
 					$crud->unset_add();
 					$crud->unset_add_fields('NO','SUDAH');

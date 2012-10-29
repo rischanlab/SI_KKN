@@ -42,7 +42,7 @@ class Kkn extends CI_Controller {
 				echo "<meta http-equiv='refresh' content='0; url=".base_url()."'>";
 			}
 			else if($tanda=="Admin"){
-				echo "<meta http-equiv='refresh' content='0; url=".base_url()."manage/peserta_kkn_management_all'>";
+				echo "<meta http-equiv='refresh' content='0; url=".base_url()."manage/peserta_kkn_management'>";
 			}
 			else {
 				echo "<meta http-equiv='refresh' content='0; url=".base_url()."dosen'>";
