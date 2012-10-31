@@ -6,9 +6,10 @@ class Manage extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->database();
-		$this->load->helper('url');
-		$this->load->library('grocery_CRUD');
+		$this->load->helper(array('form', 'url'));
+		$this->load->library(array('form_validation','grocery_CRUD'));
 		session_start();
+		
 	}
 
 	function _manage_output($output = null)
@@ -247,7 +248,7 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 					
 				$crud->set_table('KKN_KELOMPOK');
 				$crud->set_relation('KD_DOSEN','D_DOSEN','{NM_DOSEN} | {ALMT_RUMAH}');
-				$crud->display_as('KD_DOSEN','Nama DPL');
+				$crud->display_as('KD_DOSEN','Nama DPL | Alamat Rumah');
 					
 				$crud->set_relation('ID_ANGKATAN','KKN_ANGKATAN','ANGKATAN');
 				$crud->display_as('ID_ANGKATAN','Angkatan KKN');
@@ -295,75 +296,7 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 		}
 	}
-/**
-	function detail_kelompok_management()
-	{
-		$session=isset($_SESSION['username_belajar']) ? $_SESSION['username_belajar']:'';
-		if($session!=""){
-			$pecah=explode("|",$session);
-			$data["NIM"]=$pecah[0];
-			$data["NAMA"]=$pecah[1];
-			$data["STATUS"]=$pecah[3];
 
-			if($data["STATUS"]=="Admin"){
-				
-				$crud = new grocery_CRUD();
-				$crud->set_language("indonesian");
-				$crud->set_theme('datatables');
-				$crud->set_table('KKN_DETAIL_KELOMPOK');
-				$crud->set_relation('ID_KELOMPOK','KKN_KELOMPOK','NAMA_KELOMPOK');
-				$crud->display_as('ID_KELOMPOK','Nama Kelompok');
-					
-					
-				$crud->add_fields('ID_KELOMPOK','NO');
-				$crud->edit_fields('ID_KELOMPOK','NO');
-				$crud->set_relation('NO','KKN_MHS','{NIM} , {FAK}',array('SUDAH' => '2'));
-				// $crud->set_relation('user_id','users','username',array('status' => 'active'));
-				$crud->display_as('NO','Mahasiswa | Fakultas');
-				$crud->columns('ID_KELOMPOK','NO');
-				$crud->required_fields('ID_KELOMPOK','NO');
-				//$crud->fields('ID_KELOMPOK', 'FAKULTAS');
-					
-				$crud->callback_after_insert(array($this, 'set_sudah_jadi_tiga'));
-					
-				$output = $crud->render();
-
-				$this->_manage_output($output);
-				}
-				else{
-				?>
-<script type="text/javascript" language="javascript">
-			alert("Anda tidak berhak masuk ke Control Panel Admin...!!!");
-			</script>
-<?php
-echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
-			}
-		}
-		
-		else{
-			?>
-<script type="text/javascript" language="javascript">
-		alert("Anda belum Log In...!!!\nAnda harus Log In untuk mengakses halaman ini...!!!");
-		</script>
-<?php
-echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
-		}
-	}
-
-**/
-
-	
-	function jajal(){
-				$crud = new grocery_CRUD();
- 
-				$crud->set_table('KKN_DETAIL_KELOMPOK');
-				$crud->set_relation_n_n('nama', 'KKN_MHS', 'D_MAHASISWA', 'NO', 'NIM', 'NAMA');
-				$output = $crud->render();
- 
-				$this->_example_output($output);
-
-	}
-	
 	
 	function detail_kelompok_management()
 	{
@@ -447,7 +380,6 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 				$crud->edit_fields('TA');
 				$crud->columns('TA');
 				$crud->required_fields('TA');
-					
 				$output = $crud->render();
 
 				$this->_manage_output($output);
@@ -471,7 +403,9 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 		}
 	}
-		
+	
+ 
+	
 	function periode_management()
 	{
 		$session=isset($_SESSION['username_belajar']) ? $_SESSION['username_belajar']:'';
@@ -488,12 +422,20 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 				$crud->set_theme('datatables');
 				$crud->set_table('KKN_PERIODE');
 				$crud->set_relation('ID_TA','KKN_TA','TA');
-				$crud->display_as('ID_TA','Tahun Akademik');
-				$crud->required_fields('PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
+				$crud->display_as('ID_TA','Pilih Tahun Akademik');
+				$crud->required_fields('KD_PERIODE','PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
+				//$crud->field_type('PERIODE','dropdown',array('1' => 'I', '2' => 'II','3' => 'III' , '4' => 'IV', '5' => 'V', '6' => 'VI'));
+				$crud->field_type('PERIODE','set',array('I','II','III','IV','V','VI'));
+				
+				$crud->display_as('KD_PERIODE','Kode Periode (ex : P3TA12)')
+				->display_as('PERIODE','Nama Periode')
+				->display_as('TANGGAL_MULAI','Tanggal Mulai KKN')
+				->display_as('TANGGAL_SELESAI','Tanggal Selesai KKN');
+				
 					
-				$crud->add_fields('PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
-				$crud->edit_fields('PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
-				$crud->columns('PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
+				$crud->add_fields('KD_PERIODE','PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
+				$crud->edit_fields('KD_PERIODE','PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
+				$crud->columns('KD_PERIODE','PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
 				$output = $crud->render();
 					
 
@@ -536,9 +478,9 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 				$crud->set_table('KKN_ANGKATAN');
 				$crud->set_relation('ID_TA','KKN_TA','TA');
 				$crud->display_as('ID_TA','Tahun Akademik');
-				$crud->set_relation('ID_PERIODE','KKN_PERIODE','PERIODE');
+				$crud->set_relation('ID_PERIODE','KKN_PERIODE','{PERIODE} , {KD_PERIODE}');
 				$crud->display_as('ID_PERIODE','Periode');
-				$crud->set_relation('KD_DOSEN','D_DOSEN','NM_DOSEN');
+				$crud->set_relation('KD_DOSEN','D_DOSEN','{NM_DOSEN}');
 				$crud->display_as('KD_DOSEN','Ketua Panitia');
 					
 					
