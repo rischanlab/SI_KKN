@@ -48,7 +48,7 @@
 							src="<?php echo base_url(); ?>public/images/user-icon.jpg"
 							class="image" />
 						
-						<td width="175"><a href="<? echo base_url(); ?>admin"><div
+						<td width="175"><a href="<? echo base_url(); ?>manage/peserta_kkn_management"><div
 									class="menu-user">Masuk ke Panel Admin</div> </a> <a
 							href="<? echo base_url(); ?>kkn/passwordmhs"
 							onclick="return hs.htmlExpand(this, { objectType: 'iframe' } )"><div

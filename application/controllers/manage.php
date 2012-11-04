@@ -423,19 +423,17 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 				$crud->set_table('KKN_PERIODE');
 				$crud->set_relation('ID_TA','KKN_TA','TA');
 				$crud->display_as('ID_TA','Pilih Tahun Akademik');
-				$crud->required_fields('KD_PERIODE','PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
-				//$crud->field_type('PERIODE','dropdown',array('1' => 'I', '2' => 'II','3' => 'III' , '4' => 'IV', '5' => 'V', '6' => 'VI'));
-				$crud->field_type('PERIODE','set',array('I','II','III','IV','V','VI'));
+				$crud->required_fields('PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
 				
-				$crud->display_as('KD_PERIODE','Kode Periode (ex : P3TA12)')
-				->display_as('PERIODE','Nama Periode')
+				$crud->field_type('PERIODE','set',array('I','II','III','IV'));
+				$crud->display_as('PERIODE','Nama Periode')
 				->display_as('TANGGAL_MULAI','Tanggal Mulai KKN')
 				->display_as('TANGGAL_SELESAI','Tanggal Selesai KKN');
 				
 					
-				$crud->add_fields('KD_PERIODE','PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
-				$crud->edit_fields('KD_PERIODE','PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
-				$crud->columns('KD_PERIODE','PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
+				$crud->add_fields('PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
+				$crud->edit_fields('PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
+				$crud->columns('PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
 				$output = $crud->render();
 					
 
@@ -460,7 +458,7 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 		}
 	}
-
+/**
 	function angkatan_management()
 	{
 		$session=isset($_SESSION['username_belajar']) ? $_SESSION['username_belajar']:'';
@@ -482,17 +480,18 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 				$crud->display_as('ID_PERIODE','Periode');
 				$crud->set_relation('KD_DOSEN','D_DOSEN','{NM_DOSEN}');
 				$crud->display_as('KD_DOSEN','Ketua Panitia');
-					
-					
+				
 				$crud->add_fields('ANGKATAN','ID_TA','ID_PERIODE','KD_DOSEN');
 				$crud->edit_fields('ANGKATAN','ID_TA','ID_PERIODE','KD_DOSEN');
 					
 				$crud->columns('ANGKATAN','ID_TA','ID_PERIODE','KD_DOSEN');
 				$crud->required_fields('ANGKATAN','ID_TA','ID_PERIODE','KD_DOSEN');
 					
+					
 				$output = $crud->render();
-
+				
 				$this->_manage_output($output);
+				
 				}
 				else{
 				?>
@@ -514,7 +513,7 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 		}
 	}
 
-	
+	**/
 	
 	 
 	
@@ -538,6 +537,117 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 	{
 		return $value='jajal';
 	}
+
+	
+	
+	function angkatan_management()
+	{
+		$session=isset($_SESSION['username_belajar']) ? $_SESSION['username_belajar']:'';
+		if($session!=""){
+			$pecah=explode("|",$session);
+			$data["NIM"]=$pecah[0];
+			$data["NAMA"]=$pecah[1];
+			$data["STATUS"]=$pecah[3];
+
+			if($data["STATUS"]=="Admin"){
+				  $this->load->model('Manage_model','',TRUE);
+				  $data['query'] = $this->Manage_model->getAll();
+				  $this->load->view('admin/show',$data);
+				  $data_input['option_ta'] = $this->Manage_model->getTaList();
+				  $this->load->view('admin/input',$data_input);
+				  $data_dpl['dpl'] = $this->Manage_model->get_dropdown_dosen();
+				  $this->load->view('admin/input_dpl',$data_dpl);
+				   
+				  
+				  
+
+				  
+				  
+				 
+				  
+				
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+				
+				}
+				else{
+				?>
+<script type="text/javascript" language="javascript">
+			alert("Anda tidak berhak masuk ke Control Panel Admin...!!!");
+			</script>
+<?php
+echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
+			}
+		}
+		
+		else{
+			?>
+<script type="text/javascript" language="javascript">
+		alert("Anda belum Log In...!!!\nAnda harus Log In untuk mengakses halaman ini...!!!");
+		</script>
+<?php
+echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
+		}
+	}
+	
+	function select_periode(){
+			$this->load->model('Manage_model','',TRUE);
+            if('IS_AJAX') {
+        	$data['option_periode'] = $this->Manage_model->getPeriodeList();		
+			$this->load->view('admin/periodechan',$data);
+            }
+		
+	}
+	
+	
+	 function submit(){
+    if ($this->input->post('ajax')){
+      if ($this->input->post('id')){
+      	$this->MDaily->update();
+      	$data['query'] = $this->MDaily->getAll();
+      	$this->load->view('daily/show',$data);
+      }else{
+      	$this->MDaily->save();
+      	$data['query'] = $this->MDaily->getAll();
+      	$this->load->view('daily/show',$data);
+      }
+
+    }else{
+      if ($this->input->post('submit')){
+          if ($this->input->post('id')){
+            $this->MDaily->update();
+            redirect('daily/index');
+          }else{
+            $this->MDaily->save();
+            redirect('daily/index');
+          }
+      }
+    }
+  }
 
 
 

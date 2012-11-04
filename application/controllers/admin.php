@@ -145,7 +145,9 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 	}
 	
 	
-	function perperiode(){
+	
+	
+	function pesertaperperiode(){
 		$session=isset($_SESSION['username_belajar']) ? $_SESSION['username_belajar']:'';
 		if($session!=""){
 			$pecah=explode("|",$session);
@@ -154,92 +156,55 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 			$data["STATUS"]=$pecah[3];
 
 			if($data["STATUS"]=="Admin"){
-		
-				$this->load->model('Admin_model','',TRUE);
-					
-				//$category = $this->Dosen_model->get_dropdown();
-					
-			
-
-				// load view
-				$datestring = "Login : %d-%m-%Y pukul %h:%i %a";
-				$time = time();
-					
-					
-				$ta['ta'] = $this->Admin_model->get_ta();
-				$periode['periode'] = $this->Admin_model->get_periode();
-				$angkatan['angkatan'] = $this->Admin_model->get_angkatan();
-					
-				$this->load->view('admin/bg_head',$data);
-				$this->load->view('admin/ta', $ta);
-				$this->load->view('admin/periode', $periode);
-				$this->load->view('admin/angkatan', $angkatan);
-				$this->load->view('admin/bg_bawah');
-				}
-					else{
-				?>
-<script type="text/javascript" language="javascript">
-			alert("Anda tidak berhak masuk ke Control Panel Admin...!!!");
-			</script>
-<?php
-echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
-			}
-		}
-		else{
-			?>
-<script type="text/javascript" language="javascript">
-		alert("Anda belum Log In...!!!\nAnda harus Log In untuk mengakses halaman ini...!!!");
-		</script>
-<?php
-echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
-		}
-	
-	}
-	
-	
-		function pesertaperperiode(){
-		$session=isset($_SESSION['username_belajar']) ? $_SESSION['username_belajar']:'';
-		if($session!=""){
-			$pecah=explode("|",$session);
-			$data["NIM"]=$pecah[0];
-			$data["NAMA"]=$pecah[1];
-			$data["STATUS"]=$pecah[3];
-
-			if($data["STATUS"]=="Admin"){
-		$ta=$this->input->post('ta');
-		$periode=$this->input->post('periode');
-		$angkatan=$this->input->post('angkatan');
+		$ta=$this->input->post('id_ta');
+		$periode=$this->input->post('id_periode');
+		$angkatan=$this->input->post('id_angkatan');
 		if (($ta==='') ||($periode==='')||($angkatan==='')){
 		?>
 		<script>alert("Anda Isian yang belum anda pilih (TA/Periode/Angkatan), silahkan ulangi...!!!");</script>
 		
 		<?php
-		echo "<meta http-equiv='refresh' content='0; url=".base_url()."admin/perperiode'>";
+		echo "<meta http-equiv='refresh' content='0; url=".base_url()."admin/csvpeserta'>";
 		}
 			else {
 			
-				$this->load->model('Admin_model','',TRUE);
-				$query = $this->Admin_model->to_csv($ta,$periode,$angkatan);
-				if (count($query->result_array())>0){
-					$this->load->helper('xls');
-					query_to_xls($query, TRUE, 'PESERTA_KKN_'.date('dMy').'.xls');
-				
-				}else {
-				?>
-<script type="text/javascript">
-			alert("Data Kosong..!!!");			
-			</script>
-<?php
-echo "<meta http-equiv='refresh' content='0; url=".base_url()."admin/perperiode'>";
-				
-				
-				
+					$this->form_validation->set_rules('id_angkatan', 'Angkatan', 'trim|is_natural_no_zero|xss_clean');
+					$this->form_validation->set_rules('id_ta', 'Tahun Akademik', 'trim|required');
+					$this->form_validation->set_rules('id_periode', 'Periode KKN', 'trim|required|xss_clean');
+					if ($this->form_validation->run() == FALSE){
+					?>
+					<script type="text/javascript">
+									alert("Semua Field harus diisi..!!!");			
+									</script>
+					
+					<?php
+						echo "<meta http-equiv='refresh' content='0; url=".base_url()."csvpeserta'>";
+					} else {
+					
+						$this->load->model('Admin_model','',TRUE);
+						$query = $this->Admin_model->to_csv($ta,$periode,$angkatan);
+										if (count($query->result_array())>0){
+											$this->load->helper('xls');
+											query_to_xls($query, TRUE, 'PESERTA_KKN_'.date('dMy').'.xls');
+										
+										}else {
+										?>
+						<script type="text/javascript">
+									alert("Data Kosong..!!!");			
+									</script>
+						<?php
+						echo "<meta http-equiv='refresh' content='0; url=".base_url()."csvpeserta'>";
+										
+										
+										
+										}
+										
+										}
+						
+					
+									
+					
 				}
-				
-			
-							
-			
-			}
 		
 		
 		}
