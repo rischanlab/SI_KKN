@@ -8,6 +8,26 @@ class Angkatan_model extends CI_Model {
 		parent::__construct();
 		$this->table_name = 'KKN_ANGKATAN'; //setting nama tabel
 	}
+	
+	
+	function nama_kelompok(){
+		 $query=$this->db->query("SELECT ID_KELOMPOK, NAMA_KELOMPOK FROM KKN_KELOMPOK");
+   
+		  return $query;
+	
+	
+	
+	}
+	
+	
+	function get_peserta_kkn_perkelompok($id_kelompok){
+		 $query=$this->db->query("SELECT A.NAMA,A.NIM, B.JK, B.FAK, C.NAMA_KELOMPOK FROM D_MAHASISWA A, KKN_MHS B, KKN_KELOMPOK C, KKN_DETAIL_KELOMPOK D WHERE B.NIM=A.NIM AND C.ID_KELOMPOK=D.ID_KELOMPOK AND B.NO=D.NO AND C.ID_KELOMPOK ='$id_kelompok'");
+   
+		  return $query;
+	
+	
+	
+	}
 
 	function create_data($data) //untuk manambah record
 	{
@@ -41,6 +61,19 @@ class Angkatan_model extends CI_Model {
 	
 	
 	}
+	
+	
+	
+	function get_data_page($limit, $offset)
+	{
+		  $query=$this->db->query("SELECT * FROM (SELECT K.*, ROWNUM rnum FROM(SELECT A.ID_ANGKATAN, A.ANGKATAN, B.PERIODE, C.TA ,D.NM_DOSEN FROM KKN_ANGKATAN A, KKN_PERIODE B, KKN_TA C , D_DOSEN D WHERE B.ID_PERIODE=A.ID_PERIODE AND C.ID_TA=A.ID_TA AND D.KD_DOSEN=A.KD_DOSEN ORDER BY A.ANGKATAN) K WHERE ROWNUM <= $limit) WHERE rnum >= $offset");
+   
+		  return $query;
+	
+	
+	}
+	
+	
 	
 	function update_data($kode,$data) //untuk meng-update record 
 	{
@@ -121,7 +154,7 @@ class Angkatan_model extends CI_Model {
 		$array_keys_values = $this->db->get();
         foreach ($array_keys_values->result() as $row)
         {
-            $result[0]= '-Pilih Periode-';
+            $result[0]= '-Pilih Angkatan-';
             $result[$row->ID_ANGKATAN]= $row->ANGKATAN;
         }
         
@@ -146,6 +179,18 @@ class Angkatan_model extends CI_Model {
 			$dropdown = array('' => 'Pilih Angkatan');
 				foreach($query->result_array() as $r) {
 				$dropdown[$r['ID_ANGKATAN']] = $r['ANGKATAN'];
+				}
+			return $dropdown;
+		}
+		
+		
+		 public function get_nama_kelompok() {
+		
+		$query = $this->db->query("SELECT ID_KELOMPOK,NAMA_KELOMPOK FROM KKN_KELOMPOK");
+
+			$dropdown = array('' => 'Pilih Kelompok');
+				foreach($query->result_array() as $r) {
+				$dropdown[$r['ID_KELOMPOK']] = $r['NAMA_KELOMPOK'];
 				}
 			return $dropdown;
 		}

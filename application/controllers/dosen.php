@@ -94,28 +94,50 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/'>";
 				$nim =$_SESSION['data']['id_user'];
 				$nm_user2 =$_SESSION['data']['nm_user'];
 				$this->load->model('Dosen_model','',TRUE);
+				$hasil = $this->Dosen_model->cek_dosen_membina($nim);
+				if (count($hasil->result_array())>0){
+						
 					
-				//$category = $this->Dosen_model->get_dropdown();
-					
-				$data['title'] = 'Mahasiswa Detail';
-				$data['link_back'] = anchor('mahasiswa/index/','Kembali Ke Beranda',array('class'=>'back'));
+							//$category = $this->Dosen_model->get_dropdown();
+								
+							$data['title'] = 'Mahasiswa Detail';
+							$data['link_back'] = anchor('mahasiswa/index/','Kembali Ke Beranda',array('class'=>'back'));
 
-				// load view
-				$datestring = "Login : %d-%m-%Y pukul %h:%i %a";
-				$time = time();
-				$var = array();
-				$var["nama"]=$nm_user2;
+							// load view
+							$datestring = "Login : %d-%m-%Y pukul %h:%i %a";
+							$time = time();
+							$var = array();
+							$var["nama"]=$nm_user2;
+								
+							$var["tanggal"] = mdate($datestring, $time);
+								
+								
+							$category['category'] = $this->Dosen_model->get_dropdown($nim);
+								
+							$this->load->view('dosen/bg_atas',$var);
+							$this->load->view('dosen/bg_menu');
+							
+							$this->load->model('admin_model');
+							$data['cd'] = '';
+							$data['option_ta'] = $this->admin_model->getTaList();
+							$this->load->view('dosen/lihatpeserta', $data);
+							$this->load->view('dosen/bg_bawah');
+								
+				
+					}else {
+									
+									?>
+				<script type="text/javascript">
+							alert("LPM Belum Melakukan Pembagian Kelompok untuk Anda!!!");			
+							</script>
+				<?php
+				echo "<meta http-equiv='refresh' content='0; url=".base_url()."/dosen/'>";
 					
-				$var["tanggal"] = mdate($datestring, $time);
-					
-					
-				$category['category'] = $this->Dosen_model->get_dropdown($nim);
-					
-				$this->load->view('dosen/bg_atas',$var);
-				$this->load->view('dosen/bg_menu');
-				//echo form_dropdown('category', $category, array());
-				$this->load->view('dosen/lihatkelompok', $category);
-				$this->load->view('dosen/bg_bawah');
+					}
+				
+				
+				
+				
 				}
 			else{
 				?>
@@ -140,7 +162,14 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/'>";
 
 
 	}
-
+	
+	function select_kelompok(){
+			$id_dosen	= $_SESSION['data']['id_user'];
+            if('IS_AJAX') {
+        	$data['option_kelompok'] = $this->admin_model->getKelompokList($id_dosen);		
+			$this->load->view('admin/kelompok_v',$data);
+            }
+	}
 
 
 	function lihatanggota(){
@@ -169,9 +198,10 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/'>";
 			if($status2='2'){
 				$nim =$_SESSION['data']['id_user'];
 				$nm_user2 =$_SESSION['data']['nm_user'];
-				$id_kelompok=$this->input->post('category');
+				$id_kelompok=$this->input->post('id_kelompok');
 				
-				if ($id_kelompok===''){
+				
+				if ($id_kelompok==''){
 				?>
 				<script>alert("Anda Belum memilih Kelompok...!!!");</script>
 				

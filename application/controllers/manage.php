@@ -13,8 +13,12 @@ class Manage extends CI_Controller {
 	}
 
 	function _manage_output($output = null)
-	{
-		$this->load->view('manage.php',$output);
+	{		
+		
+		$data = array();
+		$data["tanggal"] = date("d-m-Y");
+		$this->load->view('admin/bg_atas', $data);
+		$this->load->view('admin/manage.php',$output);
 	}
 
 
@@ -29,7 +33,7 @@ class Manage extends CI_Controller {
 			$data["NIM"]=$pecah[0];
 			$data["NAMA"]=$pecah[1];
 			$data["STATUS"]=$pecah[3];
-			$data['scriptmce'] = $this->scripttiny_mce();
+			
 			if($data["STATUS"]=="Admin"){
 				$this->load->view('admin/bg_head',$data);
 				$this->load->view('admin/isi_index',$data);
@@ -316,7 +320,7 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 				$crud->set_relation('ID_KELOMPOK','KKN_KELOMPOK','NAMA_KELOMPOK');
 				$crud->display_as('ID_KELOMPOK','Nama Kelompok');
 					
-					
+				$crud->unset_edit();	
 				$crud->add_fields('ID_KELOMPOK','NO');
 				$crud->edit_fields('ID_KELOMPOK','NO');
 				$crud->set_relation('NO','KKN_MHS','{NIM} , {JK}, {FAK}',array('SUDAH' => '2'));
@@ -327,6 +331,7 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 				//$crud->fields('ID_KELOMPOK', 'FAKULTAS');
 					
 				$crud->callback_after_insert(array($this, 'set_sudah_jadi_tiga'));
+				$crud->callback_after_delete(array($this, 'set_sudah_jadi_dua'));
 					
 				$output = $crud->render();
 
@@ -354,10 +359,15 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 
 	
 	
-	
 	function set_sudah_jadi_tiga($post_array){
 		$nim=$post_array['NO'];
 		$query = $this->db->query("UPDATE KKN_MHS SET SUDAH='3' WHERE NO='$nim'");
+		return $query;
+	}
+	
+	function set_sudah_jadi_dua($primary_key){
+		
+		$query = $this->db->query("UPDATE KKN_MHS SET SUDAH='2' WHERE NO=(SELECT NO FROM KKN_DETAIL_KELOMPOK WHERE ID_DETAIL_KELOMPOK='$primary_key')");
 		return $query;
 	}
 
@@ -425,8 +435,10 @@ echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
 				$crud->display_as('ID_TA','Pilih Tahun Akademik');
 				$crud->required_fields('PERIODE','TANGGAL_MULAI','TANGGAL_SELESAI','ID_TA');
 				
-				$crud->field_type('PERIODE','set',array('I','II','III','IV'));
-				$crud->display_as('PERIODE','Nama Periode')
+				//$crud->field_type('PERIODE','set',array('I','II','III','IV'));
+				//$crud->field_type('PERIODE','dropdown', array('I','II','III','IV'));
+				$crud->field_type('PERIODE','enum',array('I','II','III','IV'));
+				$crud->display_as('PERIODE','Periode')
 				->display_as('TANGGAL_MULAI','Tanggal Mulai KKN')
 				->display_as('TANGGAL_SELESAI','Tanggal Selesai KKN');
 				

@@ -224,7 +224,7 @@ class grocery_CRUD_Field_Types
 				break;															
 				case 'readonly':
 					$field_info->input = $this->get_readonly_input($field_info,$value);
-				break;						
+				break;				
 				
 				default:
 					$field_info->input = $this->get_string_input($field_info,$value);
@@ -1969,7 +1969,6 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 		return '<div id="field-'.$field_info->name.'" class="readonly_label">'.$value.'</div>';
 	}
 	
-
 	protected function get_set_input($field_info,$value)
 	{
 		$this->set_css($this->default_css_path.'/jquery_plugins/chosen/chosen.css');

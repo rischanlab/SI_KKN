@@ -82,3 +82,11 @@ begin
 select kkn_angkatan_seq.nextval into :new.ID_ANGKATAN from dual;
 end;
 /
+
+CREATE OR REPLACE TRIGGER kkn_peserta_after_delete
+AFTER DELETE ON KKN_DETAIL_KELOMPOK 
+FOR EACH ROW
+BEGIN
+UPDATE KKN_MHS SET SUDAH='2' WHERE NO=:old.NO;
+END;
+/

@@ -21,6 +21,12 @@ class Dosen_model extends CI_Model
 		}
 		return $dropdown;
 	}
+	
+	function cek_dosen_membina($id_dosen){
+		$query=$this->db->query("SELECT ID_KELOMPOK,NAMA_KELOMPOK FROM KKN_KELOMPOK WHERE KD_DOSEN='$id_dosen'");
+		return $query;
+
+	}
 
 	function get_anggotakelompok($id_kelompok){
 
@@ -34,6 +40,22 @@ class Dosen_model extends CI_Model
 		return $query;
 
 	}
+	
+	function getKelompokList($id_dosen){
+		$id_angkatan 	= $this->input->post('id_angkatan');
+	
+		$result = array();
+
+		$array_keys_values = $this->db->query("SELECT ID_KELOMPOK, NAMA_KELOMPOK FROM KKN_KELOMPOK WHERE ID_ANGKATAN='$id_angkatan' AND KD_DOSEN='$id_dosen' ORDER BY NAMA_KELOMPOK ASC");
+        foreach ($array_keys_values->result() as $row)
+        {
+            $result[0]= '-Pilih Kelompok-';
+            $result[$row->ID_KELOMPOK]= $row->NAMA_KELOMPOK;
+        }
+        
+        return $result;
+	}
+		
 
 
 }

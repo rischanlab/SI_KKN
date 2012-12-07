@@ -1,1 +1,0 @@
-<?php echo form_dropdown('periode', $periode, array()); ?>

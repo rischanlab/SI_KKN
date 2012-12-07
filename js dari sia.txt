@@ -58,3 +58,8 @@ javascript:openWindow('http://elearning.sia.uin-suka.ac.id/st/conf/cek_login.php
 
 bPK sumarsono
 http://localhost/SI_KKN/cek_login.php?kd_kelas=2260710019781&nm_kelas=Pemrograman%20Terstruktur%20%20%20%20A&kd_ta=2012&kd_smt=1&id_user=150368349&nm_user=SUMARSONO,%20ST.,%20M.Kom.&kd_kur=KUR-09&kd_prodi=22607&nm_prodi=TEKNIK%20INFORMATIKA&kd_mk=TIF20414&sks_mk=4&status=2
+
+javascript:openWindow('http://elearning.sia.uin-suka.ac.id/st/conf/cek_login.php?kd_kelas=2260710019896&nm_kelas=Kuliah%20Kerja%20Nyata%20%20%20%20A&kd_ta=2012&kd_smt=1&id_user=150293687&nm_user=AGUS%20MULYANTO,%20S.SI,%20M.KOM&kd_kur=KUR-09&kd_prodi=22607&nm_prodi=TEKNIK%20INFORMATIKA&kd_mk=FST50224&sks_mk=4&status=2')
+
+pak agus
+http://localhost/SI_KKN/cek_login.php?kd_kelas=2260710019896&nm_kelas=Kuliah%20Kerja%20Nyata%20%20%20%20A&kd_ta=2012&kd_smt=1&id_user=150293687&nm_user=AGUS%20MULYANTO,%20S.SI,%20M.KOM&kd_kur=KUR-09&kd_prodi=22607&nm_prodi=TEKNIK%20INFORMATIKA&kd_mk=FST50224&sks_mk=4&status=2

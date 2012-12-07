@@ -12,20 +12,53 @@ class Upload extends CI_Controller {
 		session_start();
     }
     
-    function index(){
-        //kita tampilkan thumbnail
-        $subdata = array(
-            'cropping_div' => $this->load->view('_account_cropping', '', true),
-            'user_thumb' => $this->Mediatutorialprofile->genProfileThumb()
-        );
-        $content = $this->load->view('_account_profilepic_and_status', $subdata, true);
-        //
-        $data = array(
-            'title' => 'Simple profile pic uploader',
-            'body' => $content
-        );
-        $this->load->view('_output_html', $data);
-    }
+	
+	
+	function index()
+
+	{
+
+		$session=isset($_SESSION['username_belajar']) ? $_SESSION['username_belajar']:'';
+		if($session!=""){
+			$pecah=explode("|",$session);
+			$data["NIM"]=$pecah[0];
+			$data["NAMA"]=$pecah[1];
+			$data["STATUS"]=$pecah[3];
+			
+			if($data["STATUS"]=="Admin"){
+						$subdata = array(
+							'cropping_div' => $this->load->view('_account_cropping', '', true),
+							'user_thumb' => $this->Mediatutorialprofile->genProfileThumb()
+						);
+						$content = $this->load->view('_account_profilepic_and_status', $subdata, true);
+						//
+						$data = array(
+							'title' => 'Simple profile pic uploader',
+							'body' => $content
+						);
+						$this->load->view('_output_html', $data);
+			}
+			else{
+				?>
+<script type="text/javascript" language="javascript">
+			alert("Anda tidak berhak masuk ke Control Panel Admin...!!!");
+			</script>
+<?php
+echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
+			}
+		}
+		else{
+			?>
+<script type="text/javascript" language="javascript">
+		alert("Anda belum Log In...!!!\nAnda harus Log In untuk mengakses halaman ini...!!!");
+		</script>
+<?php
+echo "<meta http-equiv='refresh' content='0; url=".base_url()."kkn'>";
+		}
+	}
+	
+	
+  
     
     /*
      fungsi untuk upload image

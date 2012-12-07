@@ -13,10 +13,10 @@
 		<script src="<?php echo base_url();?>assets/js/jquery-ui.min.js" type="text/javascript"></script></head>
 
 </head>
-<div id="bg-isi">
+<div id="rightContent">
 		<h3>Silahkan Pilih Nama Kelompok kemudian Tekan Tombol Lihat Anggota Kelompok</h3>
    <center>
-    <form method="post" action="<?php echo base_url(); ?>admin/export_do">
+    <form method="post" action="<?php echo base_url(); ?>dosen/lihatanggota">
 	
       
       
@@ -83,11 +83,19 @@
                 </table>
 					<br/>
 	
-
+		
+		 
+		 
+		
+		
+      
+	  
+	  
+	  
 	  
         <div id="field">
             <span class="label">&nbsp;</span>
-            <?php echo form_submit(array('name'=>'submit','id'=>'submit','value'=>'Export Kartu KKN per Kelompok'));?>
+            <?php echo form_submit(array('name'=>'submit','id'=>'submit','value'=>'Lihat Kelompok KKN yang dibina'));?>
 		
             
         </div>
@@ -153,7 +161,7 @@
 	    			$('#id_kelompok').attr("disabled",true);
 	    			$.ajax({
 							type: "POST",
-							url : "<?php echo site_url('admin/select_kelompok')?>",
+							url : "<?php echo site_url('dosen/select_kelompok')?>",
 							data: id_ta,
 							success: function(msg){
 								$('#kelompok').html(msg);

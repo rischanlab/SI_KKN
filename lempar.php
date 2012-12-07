@@ -1,12 +1,19 @@
 <?php
 session_start();
 session_cache_expire(1);
+
 //$cek_status= $_SESSION['data']['status'];
 if ($_SESSION['data']['status']=='1'){ //jika status =1 maka dilempar ke form/mahasiswa
-	echo("<script language=javascript>window.location='http://localhost/SI_KKN/form';</script>");
+		?>
+			<script language=javascript>window.location='/SI_KKN/form';</script>"
+		<?php
 	} 
 if($_SESSION['data']['status']=='2'){ //jika status =2 maka dilempar ke dosen
-	echo("<script language=javascript>window.location='http://localhost/SI_KKN/dosen';</script>");
+	
+	?>
+			<script language=javascript>window.location='/SI_KKN/dosen';</script>"
+		<?php
+		
 	}
 	else{
 ?>

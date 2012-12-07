@@ -22,8 +22,7 @@ foreach($css_files as $file): ?>
 <body>
 
 	<div>
-	<h3 align="center">Control Panel Admin  <a href="<?php echo base_url(); ?>kkn/logout_admin"><font color="red">Logout</font></a></h3>
-	
+
 	
 	</div>
 		<div class="shortcutHome">
@@ -42,7 +41,7 @@ foreach($css_files as $file): ?>
 		<a href="<?php echo base_url(); ?>index.php/manage/periode_management" ><img src="<?php echo base_url(); ?>assets/mos-css/img/periode.png"><br>Atur Periode</a>
 		</div>
 		<div class="shortcutHome">
-		<a href="<?php echo base_url(); ?>index.php/angkatan" ><img src="<?php echo base_url(); ?>assets/mos-css/img/angkatan.png"><br>Atur Angkatan</a>
+		<a href="<?php echo base_url(); ?>index.php/admin/angkatan" ><img src="<?php echo base_url(); ?>assets/mos-css/img/angkatan.png"><br>Atur Angkatan</a>
 		</div>
 		
 		<div class="shortcutHome">
@@ -55,7 +54,7 @@ foreach($css_files as $file): ?>
 		<a href="<?php echo base_url(); ?>admin/export" target="_blank"><img src="<?php echo base_url(); ?>assets/mos-css/img/cetak.png"><br>Cetak Kartu KKN</a>
 		</div>
 			<div class="shortcutHome">
-		<a href="<?php echo base_url(); ?>index.php/csvpeserta" ><img src="<?php echo base_url(); ?>assets/mos-css/img/peserta.png"><br>Peserta KKN per Periode</a>
+		<a href="<?php echo base_url(); ?>index.php/admin/download_peserta" ><img src="<?php echo base_url(); ?>assets/mos-css/img/peserta.png"><br>Peserta KKN per Periode</a>
 		</div>
 		
 		

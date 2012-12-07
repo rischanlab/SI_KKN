@@ -1,12 +1,11 @@
 /*******THUMB*********/
 .thumb{
-    background-image:url("../images/pic_bg.png");
-    background-repeat:no-repeat;
-    background-position: center;
+   
     width:300px;
     height:300px;
     position:relative;
     float:right;
+	margin-right:80px;
     text-align:center;
 }
 .pic_thumb{
@@ -42,23 +41,25 @@
 
 /******start upload profilepic*****/
 .change_button{
-    width:63%;
+    width:83%;
     z-index:50;
     text-align:center;
     position: absolute;
+	margin-right:5px;
 }
 
 .btn_loading{
-    width:63%;
+    width:83%;
     z-index:50;
     text-align:center;
     position: absolute;
+	margin-right:5px;
 }
 
 .form_profile_pic{
     z-index:10;
     position: absolute;
-    margin-right:0px;
+    margin-left:95px;
     padding:0px;
 }
 /******end upload profilepic*****/

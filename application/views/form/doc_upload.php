@@ -75,7 +75,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 										<tbody>
 
 											<tr>
-												<td valign="top" class="txt_login">Foto*</td>
+												<td valign="top" class="txt_login">Foto* png,jpg,jpeg</td>
 												<td class="txt_login"><input type="file" name="foto"
 													id="foto" class="txt_login">
 												
@@ -83,7 +83,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 											</tr>
 											<tr>
 												<td valign="top" class="txt_login">Surat Kesehatan dari
-													Dokter*</td>
+													Dokter* jpg,pdf,doc</td>
 												<td class="txt_login"><input type="file" name="sk_sehat"
 													id="sk_sehat" class="txt_login">
 												
@@ -91,7 +91,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 											</tr>
 											<tr>
 												<td valign="top" class="txt_login">Surat Ket.Gol.Darah dari
-													Dokter*</td>
+													Dokter* jpg,pdf,doc</td>
 												<td class="txt_login"><input type="file" name="sk_gol_darah"
 													id="sk_gol_darah" class="txt_login">
 												
@@ -99,7 +99,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 											</tr>
 											<tr>
 												<td valign="top" class="txt_login">SK Tidak Hamil(bagi yang
-													sudah menikah)</td>
+													sudah menikah) jpg,pdf,doc</td>
 												<td class="txt_login"><input type="file"
 													name="sk_tidak_hamil" id="sk_tidak_hamil" class="txt_login">
 												
@@ -107,7 +107,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 											</tr>
 											<tr>
 												<td valign="top" class="txt_login">SK Cuti (bagi yang
-													bekerja)</td>
+													bekerja) jpg,pdf,doc</td>
 												<td class="txt_login"><input type="file"
 													name="sk_cuti_kerja" id="sk_cuti_kerja" class="txt_login">
 												
